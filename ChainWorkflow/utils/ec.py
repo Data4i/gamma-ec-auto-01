@@ -32,6 +32,7 @@ def make_phone_call(recipient_phone, call_script, twilio_number, account_sid, au
         print(f"Call initiated! Call SID: {call.sid}")
     except Exception as e:
         print(f"Failed to make call: {e}")
+        return e
         
         
 def send_email(subject, recipient, body, sender_email, sender_password):
@@ -62,3 +63,4 @@ def send_email(subject, recipient, body, sender_email, sender_password):
         print("Email sent successfully!")
     except Exception as e:
         print(f"Failed to send email: {e}")
+        return e
