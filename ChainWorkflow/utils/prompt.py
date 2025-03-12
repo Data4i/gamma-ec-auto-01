@@ -8,27 +8,29 @@ Given the following details, generate a JSON response containing:
 
 1. `recipient_email`: The **email address of the recipient** (as provided in the input).  
 2. `recipient_phone`: The **phone number of the recipient** (as provided in the input).  
-3. `subject`: A compelling **email subject line** that grabs attention and encourages the recipient to open the email.  
-4. `email`: A **personalized cold email** that follows this structure:  
+3. `sender_email`: The **email address of the sender** (as provided in the input).  
+4. `subject`: A compelling **email subject line** that grabs attention and encourages the recipient to open the email.  
+5. `email`: A **personalized cold email** that follows this structure:  
    - **[Opening sentence]**: Connect with their industry, a recent trend, or challenge.  
    - **[Value proposition]**: How your insurance solution helps companies in their industry.  
    - **[Objection handling]**: Address a common concern relevant to their industry.  
    - **[CTA]**: Suggest a **quick call, demo, or free consultation**.  
 
-5. `call_script`: A **short but effective cold call script** (under 100 words) that:  
+6. `call_script`: A **short but effective cold call script** (under 100 words) that:  
    - Starts with a **brief introduction**.  
    - Highlights a **pain point** relevant to their industry.  
    - Presents the **key benefit of the insurance** in a single sentence.  
    - Handles a **likely objection** in one sentence.  
    - Ends with a **clear CTA** (e.g., booking a call, requesting more info).  
 
-6. `advise`: A **follow-up strategy** to keep the client engaged based on their industry and potential objection.  
+7. `advise`: A **follow-up strategy** to keep the client engaged based on their industry and potential objection.  
 
 ---
 
 ### **Input**  
 - **Recipient Email**: {recipient_email}  
 - **Recipient Phone**: {recipient_phone}  
+- **Sender Email**: {sender_email}  
 - **Company Name**: {company_name}  
 - **Industry**: {industry}  
 - **Engagement Level**: {engagement_level}  
@@ -38,7 +40,7 @@ Given the following details, generate a JSON response containing:
 
 ---
 
-###Note: The email is sent to {company_name} so the greeting at the beginning of the email should be attributed to {company_name}
+### **Note:** The email is sent to {company_name}, so the greeting at the beginning of the email should be attributed to {company_name}.
 
 ---
 
@@ -46,9 +48,10 @@ Given the following details, generate a JSON response containing:
 {{
   "recipient_email": "{recipient_email}",
   "recipient_phone": "{recipient_phone}",
+  "sender_email": "{sender_email}",
   "subject": "[Compelling subject line]",
   "email": "[Generated cold email]",
   "call_script": "[Short, high-impact cold call script]",
   "advise": "[Follow-up strategy and recommendations]"
 }}
-"""  
+"""

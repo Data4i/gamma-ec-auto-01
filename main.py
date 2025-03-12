@@ -11,6 +11,7 @@ class AutomationRequest(BaseModel):
     objections: str
     insurance_company_name: str
     sender_name: str
+    sender_email: str
     recipient_email: str
     recipient_phone: str
 
@@ -24,12 +25,14 @@ async def automate(request: AutomationRequest):
             "objection": request.objections,
             "insurance_company_name": request.insurance_company_name,
             "sender_name": request.sender_name,
+            "sender_email": request.sender_email,
             "recipient_email": request.recipient_email,
             "recipient_phone": request.recipient_phone
         })
         return response
     except Exception as e:
         return {"error": str(e)}
+
 
 if __name__ == "__main__":
     import uvicorn

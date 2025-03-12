@@ -13,7 +13,7 @@ def send_cold_email(generated_inputs):
             subject=generated_inputs['subject'],
             recipient=generated_inputs['recipient_email'],
             body=generated_inputs['email'],
-            sender_email="paulobiahu@gmail.com",
+            sender_email=generated_inputs['sender_email'],
             sender_password=EMAIL_PASSWORD
         )
         return "Success"
