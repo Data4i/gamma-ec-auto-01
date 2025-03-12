@@ -5,7 +5,7 @@ ACCOUNT_SID = config("ACCOUNT_SID")
 AUTH_TOKEN = config("AUTH_TOKEN")
 TWILIO_NUMBER = config("TWILIO_NUMBER")
 RECIPIENT_NUMBER = "+2348101116037"
-EMAIL_PASSWORD = config("EMAIL_PASSWORD")
+EMAIL_PASSWORD = config("EMAIL_APP_PASSWORD")
 
 def send_cold_email(generated_inputs):
     try:
@@ -13,7 +13,7 @@ def send_cold_email(generated_inputs):
             subject=generated_inputs['subject'],
             recipient=generated_inputs['recipient_email'],
             body=generated_inputs['email'],
-            sender_email=generated_inputs['sender_email'],
+            sender_email="gammainsure@gmail.com",
             sender_password=EMAIL_PASSWORD
         )
         return "Success"
