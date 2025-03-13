@@ -61,6 +61,7 @@ def send_email(subject, recipient, body, sender_email, sender_password):
             server.login(sender_email, sender_password)
             server.send_message(msg)
         print("Email sent successfully!")
+        return "Success"
     except Exception as e:
         print(f"Failed to send email: {e}")
-        return e
+        return "Failure"

@@ -2,4 +2,7 @@
 .env.save
 .ipynb_checkpoints/
 .venv
-.auto_venv
+.auto_venv/
+__pycache__/
+uploads/
+*.csv

@@ -28,24 +28,25 @@ def read_file(file_path):
     except Exception as e:
         print(f"Error reading file: {e}")
         return None
-    
+
+
 def get_company_info(file_path):
     """
-    Extracts company-related information from the given file.
+    Extracts company-related information from the given file and formats it into a list of dictionaries.
     
     Parameters:
         file_path (str): Path to the file.
     
     Returns:
-        tuple: Data for Company Names, Fields, Email, Phone, Preferred Channel, Objections, Engagement Level, and Notes.
+        list: List of dictionaries with company data formatted for LLM input.
     """
     df = read_file(file_path)
     if df is None:
         return None
     
     required_columns = [
-        "Company_Names", "Company_Fields", "Email_Address", "Phone_Number", 
-        "Preferred_Channel", "Objections", "Engagement_Level", "Company_Notes"
+        'company_name', 'industry', 'engagement_level', 'objection', 
+        'insurance_company_name', 'sender_name', 'recipient_email'
     ]
     
     missing_cols = [col for col in required_columns if col not in df.columns]
@@ -54,8 +55,10 @@ def get_company_info(file_path):
         print(f"Error: Missing columns {missing_cols}.")
         print("Ensure all required columns are present in the file.")
         return None
+
+    df['recipient_phone'] = None  
+
+    # Convert data into a list of dictionaries
+    company_data = df.to_dict(orient="records")
     
-    return (
-        df["Company_Names"].values, df["Company_Fields"].values, df["Email_Address"].values, df["Phone_Number"].values, 
-        df["Preferred_Channel"].values, df["Objections"].values, df["Engagement_Level"].values, df["Company_Notes"].values
-    )
+    return company_data
