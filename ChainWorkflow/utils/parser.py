@@ -8,5 +8,6 @@ class EmailAdvise(BaseModel):
     email: str = Field(description="A cold email personalized based on the industry, engagement level, and objections.")
     call_script: str = Field(description="A structured cold call script for sales representatives to use.")
     advise: str = Field(description="A strategy to further engage the client based on their industry and previous response.")
+    company_name: str = Field(description="The **name of the company** (as provided in the input).")
 
 parser = JsonOutputParser(pydantic_object=EmailAdvise)

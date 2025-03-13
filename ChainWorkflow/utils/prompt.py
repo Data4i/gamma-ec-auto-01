@@ -23,6 +23,7 @@ Given the following details, generate a JSON response containing:
    - Ends with a **clear CTA** (e.g., booking a call, requesting more info).  
 
 6. `advise`: A **follow-up strategy** to keep the client engaged based on their industry and potential objection.  
+7. `company_name`: "The **name of the company** (as provided in the input)."
 
 ---
 
@@ -50,5 +51,6 @@ Given the following details, generate a JSON response containing:
   "email": "[Generated cold email]",
   "call_script": "[Short, high-impact cold call script]",
   "advise": "[Follow-up strategy and recommendations]"
+  "company_name": "{company_name}"
 }}
 """

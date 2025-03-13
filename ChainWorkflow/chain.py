@@ -17,11 +17,13 @@ first_chain = prompt_template | llm | parser
 cold_email_runnable = RunnableLambda(send_cold_email)
 cold_call_runnable = RunnableLambda(send_cold_call)
 get_advise_runnable = RunnableLambda(get_advise)
+get_company_name_runnable = RunnableLambda(lambda x: x['company_name'])
 
 email_and_call_chain = RunnableParallel(
     email_status=cold_email_runnable,  
     call_status=cold_call_runnable,  
-    advise_status=get_advise_runnable  
+    advise=get_advise_runnable,
+    company_name=get_company_name_runnable
 )
 
 full_chain = first_chain | email_and_call_chain
