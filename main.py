@@ -13,7 +13,8 @@ from fastapi import FastAPI, UploadFile, File, HTTPException
 app = FastAPI()
 
 UPLOAD_DIR = "uploads"
-os.makedirs(UPLOAD_DIR, exist_ok=True) 
+os.makedirs(UPLOAD_DIR, exist_ok=True)
+
 
 class AutomationRequest(BaseModel):
     company_name: str
@@ -24,6 +25,7 @@ class AutomationRequest(BaseModel):
     sender_name: str
     recipient_email: str
     recipient_phone: str
+
 
 async def retry_abatch(data, retries=3, delay=5):
     for i in range(retries):
@@ -42,16 +44,18 @@ async def retry_abatch(data, retries=3, delay=5):
 @app.post("/generate_email")
 async def automate(request: AutomationRequest):
     try:
-        response = await full_chain.ainvoke({
-            "company_name": request.company_name,
-            "industry": request.industry,
-            "engagement_level": request.engagement_level,
-            "objection": request.objections,
-            "insurance_company_name": request.insurance_company_name,
-            "sender_name": request.sender_name,
-            "recipient_email": request.recipient_email,
-            "recipient_phone": request.recipient_phone
-        })
+        response = await full_chain.ainvoke(
+            {
+                "company_name": request.company_name,
+                "industry": request.industry,
+                "engagement_level": request.engagement_level,
+                "objection": request.objections,
+                "insurance_company_name": request.insurance_company_name,
+                "sender_name": request.sender_name,
+                "recipient_email": request.recipient_email,
+                "recipient_phone": request.recipient_phone,
+            }
+        )
         return response
     except Exception as e:
         return {"error": str(e)}
@@ -73,7 +77,9 @@ async def upload_file(file: UploadFile = File(...)):
         # Extract company data
         company_data = get_company_info(file_path)
         if not company_data:
-            raise HTTPException(status_code=400, detail="Invalid file format or missing columns.")
+            raise HTTPException(
+                status_code=400, detail="Invalid file format or missing columns."
+            )
 
         # Generate responses
         responses = await retry_abatch(company_data)
@@ -82,24 +88,31 @@ async def upload_file(file: UploadFile = File(...)):
         df = pd.DataFrame(responses)
 
         # Ensure required columns exist
-        if not {'company_name', 'advise'}.issubset(df.columns):
-            raise HTTPException(status_code=500, detail="Missing required columns in the response.")
+        if not {"company_name", "advise"}.issubset(df.columns):
+            raise HTTPException(
+                status_code=500, detail="Missing required columns in the response."
+            )
 
-        df = df[['company_name', 'advise']]
-        
+        df = df[["company_name", "advise"]]
+
         # Save as Excel
         df.to_excel(output_file, index=False, engine="openpyxl")
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"An error occurred: {str(e)}")
-    
+
     finally:
         # Clean up uploaded file after processing
         if os.path.exists(file_path):
             os.remove(file_path)
 
     # Return the generated Excel file
-    return FileResponse(output_file, filename="batch_response.xlsx", media_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+    return FileResponse(
+        output_file,
+        filename="batch_response.xlsx",
+        media_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    )
+
 
 @app.get("/")
 async def root():

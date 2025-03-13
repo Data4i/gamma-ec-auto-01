@@ -1,5 +1,6 @@
 from dotenv import load_dotenv, find_dotenv
 from langchain_together import ChatTogether
+
 load_dotenv(find_dotenv())
 
 llm = ChatTogether(
