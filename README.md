@@ -39,7 +39,7 @@ AI-powered insurance outreach automation system with parallel email, phone, and 
   └─────┬────┴─────┬─────┘               │
         ▼           ▼                    │
   [Status Aggregation]◄──────────────────┘
-
+```
 ## 🚀 Quick Start
 
 ### Prerequisites
