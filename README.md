@@ -1,5 +1,4 @@
 # Gamma EC Auto 🤖📧📞
-```markdown
 AI-powered insurance outreach automation system with parallel email, phone, and strategy generation.
 
 [![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)](https://www.python.org/downloads/)
@@ -40,7 +39,6 @@ AI-powered insurance outreach automation system with parallel email, phone, and 
   └─────┬────┴─────┬─────┘               │
         ▼           ▼                    │
   [Status Aggregation]◄──────────────────┘
-```
 
 ## 🚀 Quick Start
 
